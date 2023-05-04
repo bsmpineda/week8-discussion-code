@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "881019176288",
+    "project_id": "cmsc23-todo-app-bmpineda",
+    "storage_bucket": "cmsc23-todo-app-bmpineda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881019176288:android:0e525abc55600a43f0ca05",
+        "android_client_info": {
+          "package_name": "com.example.week7_networking_discussion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881019176288-9p0na6pbeimeok8lnnj6gt6s7or51ulf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASA_6jWBF80JXz_O5ELUXOM91BxABVSo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881019176288-9p0na6pbeimeok8lnnj6gt6s7or51ulf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
