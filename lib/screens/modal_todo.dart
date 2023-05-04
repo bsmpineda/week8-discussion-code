@@ -13,8 +13,9 @@ class TodoModal extends StatelessWidget {
   String type;
   
   TextEditingController _formFieldController = TextEditingController();
+  Todo? item;
 
-  TodoModal({super.key, required this.type});
+  TodoModal({super.key, required this.type, this.item});
 
   // Method to show the title of the modal depending on the functionality
   Text _buildTitle() {
@@ -39,7 +40,7 @@ class TodoModal extends StatelessWidget {
       case 'Delete':
         {
           return Text(
-            "Are you sure you want to delete ?",
+            "Are you sure you want to delete ${item!.title}?",
           );
         }
       // Edit and add will have input field in them
@@ -86,9 +87,7 @@ class TodoModal extends StatelessWidget {
             }
           case 'Delete':
             {
-              // context
-              //     .read<TodoListProvider>()
-              //     .deleteTodo(todoItems[todoIndex].title);
+              context.read<TodoListProvider>().deleteTodo(item!.id!);
 
               // Remove dialog after editing
               Navigator.of(context).pop();

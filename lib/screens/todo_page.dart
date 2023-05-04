@@ -22,9 +22,8 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     // access the list of todos in the provider
-    List<Todo> todoList = context.watch<TodoListProvider>().todo;
     Stream<QuerySnapshot> todosStream = context.watch<TodoListProvider>().todos;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Todo"),
@@ -51,13 +50,14 @@ class _TodoPageState extends State<TodoPage> {
             itemBuilder: ((context, index) {
               Todo todo = Todo.fromJson(
                   snapshot.data?.docs[index].data() as Map<String, dynamic>);
+              todo.id = snapshot.data?.docs[index].id;
               return Dismissible(
                 key: Key(todo.id.toString()),
                 onDismissed: (direction) {
-                  // context.read<TodoListProvider>().deleteTodo(todo.title);
+                  context.read<TodoListProvider>().deleteTodo(todo.id!);
 
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //     SnackBar(content: Text('${todo.title} dismissed')));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${todo.title} dismissed')));
                 },
                 background: Container(
                   color: Colors.red,
@@ -78,23 +78,23 @@ class _TodoPageState extends State<TodoPage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (BuildContext context) => TodoModal(
-                          //     type: 'Edit',,
-                          //   ),
-                          // );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => TodoModal(
+                              type: 'Edit',
+                              item: todo,
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.create_outlined),
                       ),
                       IconButton(
                         onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (BuildContext context) => TodoModal(
-                          //     type: 'Delete',
-                          //   ),
-                          // );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                TodoModal(type: 'Delete', item: todo),
+                          );
                         },
                         icon: const Icon(Icons.delete_outlined),
                       )
@@ -106,13 +106,12 @@ class _TodoPageState extends State<TodoPage> {
           );
         },
       ),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
             context: context,
             builder: (BuildContext context) => TodoModal(
-              type: 'Add', // Flag to identify that this particular modal is for add
+              type: 'Add',
             ),
           );
         },
